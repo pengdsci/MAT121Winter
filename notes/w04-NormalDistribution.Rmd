@@ -1,0 +1,515 @@
+---
+title: "Topic 4. Normal Distribution"
+author: "Cheng Peng"
+date: " "
+output:
+  html_document: 
+    toc: yes
+    toc_float: true
+    toc_depth: 4
+    fig_width: 6
+    fig_caption: yes
+    number_sections: yes
+    theme: readable
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 5
+    fig_height: 4
+---
+
+
+```{css, echo = FALSE}
+
+div#TOC li {
+    list-style:none;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+h1.title {
+  font-size: 24px;
+  color: DarkRed;
+  text-align: center;
+}
+h4.author { /* Header 4 - and the author and data headers use this too  */
+    font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkRed;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+h2 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+```
+
+
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if(!require('vembedr')) {
+  install.packages('vembedr')
+  library('vembedr')
+}
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+# knitr::opts_knit$set(root.dir = "C:/Users/75CPENG/OneDrive - West Chester University of PA/Documents")
+# knitr::opts_knit$set(root.dir = "C:\\STA490\\w05")
+
+knitr::opts_chunk$set(echo = FALSE,       
+                      warning = FALSE,   
+                      result = TRUE,   
+                      message = FALSE)
+```
+
+
+\
+
+# Introduction
+
+The standard normal distribution is the most frequently used distribution in this course. We will introduce the general normal distributions and focus on two basic questions: Finding probabilities and percentiles using the standard normal table. 
+
+
+\
+
+# Standard Normal Distribution
+
+The standard normal distribution, $Z$, has a mean of $\mu = 0$  and a standard deviation of  $\sigma = 1$. Its probability density curve is
+
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/z-Dist.png")
+```
+
+
+Two basic types of questions need to be answered for any distribution including the standard normal distribution:
+
+1. Finding probability of events such as P(Z < a), P(Z > c), P( a < Z < b), etc.
+
+2. Finding percentiles. For example, finding $z_0$ for given P(Z < $z_0$) = 0.90.
+
+We have discussed how to find probabilities from the uniform distribution in topic #3 whose density curve is a rectangle. The probabilities of events defined based on uniform distributions are the areas of rectangles using the area formula of a rectangle. We still need to find the probability of events defined based on the standard normal distribution like P($-0.86 < Z < 0$) which is still the area of the following shaded region (as outlined in the previous note for any general distribution).
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/z-Prob.png")
+```
+
+
+\
+
+## Finding Probabilities 
+
+Unlike uniform distributions whose density curves are rectangles, we can use the formula to calculate the areas of rectangles. In a standard normal distribution, there is no formula to calculate the area of the shaded irregular region in the above figure. Watch the following YouTube to understand the structure of the **cumulative normal probability table** and examples for finding probabilities for given values (Z-values)
+
+\
+
+<center><a href="https://www.youtube.com/watch?v=p_KApjpyBHE" target="popup" 
+                   onclick="window.open('https://www.youtube.com/watch?v=p_KApjpyBHE',
+                      'name','width=850,height=500')"><img src = "https://pengdsci.github.io/MAT121W5/img/VideoIcon.png" width="200" height="120"></a>
+</center>
+
+\
+
+
+We will use a standard normal distribution table to find the area of the left-hand side tail regions shown below (part of the table).
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/z-LeftTailArea.png")
+```
+
+
+Before doing examples, we point out the basic facts of the standard normal distribution.
+
+1. The density curve is symmetric concerning the vertical axis.
+
+2. The area between the curve and the horizontal axis is equal to 1. This means that the areas of the left and right regions are equal to 0.5.
+
+Next, we use several examples to illustrate how to use the standard normal table to find the areas of different regions defined based on the standard normal distribution.
+
+
+<font color = "darkred"><b>Example 1.</b></font> Find the probabilities indicated, where as always Z denotes a standard normal random variable.
+
+1). P(Z < - 1.48).
+
+2). P(Z < 0.25).
+
+**Solution**. First of all, we only keep two decimal places for the z value (also called z-score). When using the table, we first locate the integral part and the first decimal place of the z score in the **first column** and the second decimal place in the **top row**. The **left tail area** is on the interaction of the aforementioned row and column. This is explained in the following figure.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example01.png")
+```
+
+
+
+<font color = "darkred"><b>Example 2.</b></font> Find the probabilities indicated, where as always Z denotes a standard normal random variable.
+
+1). P(Z > - 1.96).
+
+2). P(Z > 0.75).
+
+**Solution**: The probabilities to be found represent the areas of right tail regions. We can use the table to find the area of the left tail region and then subtract it from 1 to get the desired probability. The following figure illustrates the idea to get the "right-tail" probabilities.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example02.png")
+```
+
+
+<font color = "darkred"><b>Example 3.</b></font> Find the probabilities indicated, where as always Z denotes a standard normal random variable.
+
+1). P(-1.96 < Z < 0.75).
+
+**Solution**: The general idea is to find the two **left tail areas** and then take the difference to get the area of the region defined by the two z-scores as shown in the following figure.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/betweenArea.png")
+```
+
+For 1), the probability is found in the following figure.
+
+
+<center><img src="week04/example03.png" width= "800"  height="350"></center><br>
+
+**Summary of Finding Probabilities**
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/summaryFindingProb.png")
+```
+
+
+The following YouTube video shows a few more examples using the same table that was used in the above examples.
+
+\
+
+<center><a href="https://www.youtube.com/watch?v=-UljIcq_rfc" target="popup" 
+                   onclick="window.open('https://www.youtube.com/watch?v=-UljIcq_rfc',
+                      'name','width=850,height=500')"><img src = "https://pengdsci.github.io/MAT121W5/img/VideoIcon.png" width="200" height="120"></a>
+</center>
+
+\
+
+
+
+
+
+## Finding Percentiles
+
+We have introduced how to find a percentile from a given data set. We basically do the same thing for the standard normal distribution.
+
+Recall that the q-the percentile is the cut-off value such that 100q% data values are less than or equal to the cut-off value (q-th percentile). This means, we find a percentile, and the left tail area is always given. The general formulation of the problem is to find the cut-off k that satisfies 
+$$
+P(Z < k) = 0.90,
+$$
+for a given q (such as 90%, etc).  This is depicted in the following figure.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/findingPercentile.png")
+```
+
+
+The process of finding a percentile is the opposite of the process of finding probability. If the given left tail probability itself is in the main body of the table, we then locate the row and the column to find the z-score (i.e., the percentile). 
+
+In general, the given left tail probability is not in the table but is closest to two values in the main boy of the table. Each of the two closed table values corresponds to a z-score. The average of the two z-scores is defined to be the desired percentile.
+
+<font color = "darkred"><b>Example 4.</b></font> Find 90th percentile of the standard normal distribution.
+
+
+**Solution**: We go to the normal table and find two values in the main body of the table that is closest to 0.9 (see the figure below).
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/finding90thPercentile.png")
+```
+
+
+\
+
+<font color = "darkred">**Remark:** As an alternative, if the given left-tail probability is not in the **main body** of the table, you can also simply use the closest value to find the corresponding z-score as illustrated in the follwing YouTube video.</font>
+
+
+\
+<center><a href="https://www.youtube.com/watch?v=9KOJtiHAavE" target="popup" 
+                   onclick="window.open('https://www.youtube.com/watch?v=9KOJtiHAavE',
+                      'name','width=850,height=500')"><img src = "https://pengdsci.github.io/MAT121W5/img/VideoIcon.png" width="200" height="120"></a>
+</center>
+\
+
+<font color = "darkred"><b>Example 5.</b></font> **The Precision Scientific Instrument Company** manufactures thermometers that are supposed to give readings of $0^oC$ at the freezing point of water. Tests on a large sample of these instruments reveal that the freezing point of water is around zero (some thermometers give positive degrees, some thermometers give negative degrees), Assume that the mean reading is $0^oC$ and the standard deviation of the readings is $1.00^oC$. Assume further that the readings are normally distributed. 
+
+1.	Find the probability that, at the freezing point of water, the reading is between $0^oC$ and $1.58^oC$.
+
+2.	Find the probability that the reading is between $–2.43^oC$ and $0^oC$.
+
+3.	Find the probability that the reading is between $0.5^oC$ and $2.5^oC$.
+
+4.	Find the probability that the reading is between $–1^oC$ and $–2.5^oC$.
+
+5.	Find the probability that the reading is between $–1.5^oC$ and $1^oC$.
+
+6.	Find the probability that the reading is exactly $0^oC$.
+
+7.	Find the temperature z corresponding to $P_{95}$, the 95th percentile (95% of the readings less than z and 5% of the readings are greater than z).
+
+8.	Fin the 10th percentile.
+
+**Solution**: Based on the given information, the thermometer readings follow the standard normal distribution. The standard normal distribution table will be used to answer the above questions. We only do questions 5 (finding probability) and 7 (finding percentile) to work and leave the rest of the questions to you to practice.
+
+5). <font color = "red">$P( -1.5 < Z < 0) = P(Z < 0) - P(Z < -1.5) = 0.5 - P(Z < -1.5) = 0.5 - 0.0668 = 0.4332$ </font>
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example05-5.png")
+```
+
+
+7). We want to find $P_{95}$, or equivalently, to find $k$ from $P(Z < k) = 0.95$. We can see from the normal table that 0.9495 and 0.9505 are the two values that are closest to 0.95. The two corresponding z-scores are 1.64 and 1.65. By the convention, the 95th percentile is the average of the two z-scores (see the figure below).
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example05-7.png")
+```
+
+
+
+\
+
+# General Normal Distribution
+
+\
+
+In practice, we rarely have a standard normal distribution. Many real-world problems are associated with general normal distribution. We still need to answer the two basic types of questions: finding probabilities and percentile. The following figure illustrates the two types of questions based on the normal distribution with a mean of 500 ($\mu = 500$) and a standard deviation of 100 ($\sigma = 100$)
+
+<center><img src="week04/twoTypeQuestions.png" width= "600"  height="200"></center><br>
+
+The question is whether we cannot use the standard normal distribution table to answer the above two types of questions associated with general normal distribution. 
+
+We can use z-score transformation to transform general normal distributions to the standard normal distribution to use the table and then transform back the original general normal distribution. The following figure outlines the above idea.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/z-ScoreTranform.png")
+```
+
+
+
+## Finding Probabilities
+
+We use the following example to show the steps for finding the left-tail probabilities.
+
+<font color = "darkred"><b>Example 6.</b></font> Consider the general normal distribution $N(500, 100)$. Find $P(X < 600) = ?$
+
+**Solution**. The following figure shows the z-score transformation to obtain the answer.
+
+<center><img src="week04/example06.png" width= "450"  height="200"></center><br>
+
+
+## Finding Percentiles
+
+We continue to use the previous normal distribution as an example to show how to find a percentile of the general normal distribution.
+
+<font color = "darkred"><b>Example 7.</b></font> Consider the general normal distribution $N(500, 100)$. Find the 15th percentile.
+
+
+**Solution: ** We are given that the left tail area is 0.15.  After z-score transformation, the left tail area of the standard normal density curve is also 0.15 (see the following figure). We can find $Z_0$ from $P(Z < Z_0) = 0.15$ using the standard normal table which is $Z_0 \approx -1.04$.
+
+<center><img src="week04/example07.png" width= "500"  height="180"></center><br>
+
+Using the relationship between $Z_0$ and $K$ in the z-score transformation (see the above figure). We have
+
+$$
+-1.04 = \frac{K - 500}{100}
+$$
+Solve for $K$, we have $K = 500 - 1.04\times 100 = 396$.
+
+The following YouTube summarizes the two basic types of questions related to normal distribution.
+
+\
+<center><a href="https://www.youtube.com/watch?v=CjF_yQ2N638" target="popup" 
+                   onclick="window.open('https://www.youtube.com/watch?v=CjF_yQ2N638',
+                      'name','width=850,height=500')"><img src = "https://pengdsci.github.io/MAT121W5/img/VideoIcon.png" width="200" height="120"></a>
+</center>
+\
+
+
+
+<font color = "darkred"><b>Example 8.</b></font>	Tomkins Associates reports that the mean clear height for a Class A warehouse in the United States is 22 feet. Suppose clear heights are normally distributed and that the standard deviation is 4 feet. A Class A warehouse in the United States is randomly selected
+
+a). What is the probability that the clear height is greater than 17 feet?
+
+b). What is the probability that the clear height is less than 13 feet?
+
+c). What is the probability that the clear height is between 25 and 31 feet?    
+
+d). Find the clear height such that 10% of all clear heights are less than it.
+
+**Solution** The following figures outline the process of finding the answers to each of the questions.
+
+a). P(X > 17) = P(Z > -5/4) = 1 - P(Z < -5/4) = 0.8944.
+
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example08a.png")
+```
+
+b). P(X < 13) = P(Z < 9/4) = 0.012.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example08b.png")
+```
+
+c). P(25 < X  31) = P(3/4 < Z < 9/4) = P(Z < 9/4) - P(Z < 3/4) = 0.9878 - 0.9734 = 0.2144.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example08c.png")
+```
+
+d). Since P(Z < Zo) =0.10, we have Zo = - 1.28 (from the normal table). The desired clear height (10th percentile) is $X = 22-1.28\times4$ = 16.88 feet.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example08d.png")
+```
+
+\
+
+<font color = "darkred"><b>Example 9.</b></font>	In redesigning jet ejection seats to better accommodate women as pilots, it is found that women’s weights are normally distributed with a mean of 143 lb and a standard deviation of 29 lb.
+
+a). If a woman is randomly selected, what is the probability that she weighs between 163 lb and 201 lb?
+
+b). If the current ejection seat for men weighs between 130 lb and 211 lb, what percentage of women have weights that are within those limits?
+
+c). If a woman is randomly selected, what is the probability that she weighs less than 125 lb?
+
+d). If a woman is randomly selected, what is the probability that she weighs exactly 143 lb?
+
+e). If a woman is randomly selected, what is the probability that she weighs between 90 lb and 130 lb?
+
+f). Find the 10th percentile P10, that is, the weight separating the bottom 10% from the top 90%.
+
+**Solution** The following are brief solutions with graphical explanations.
+
+a).   P(163 < X < 201) = P(0.69 < Z < 2) = P(Z < 2) - P(Z < 0.69) = 0.9772 - 0.7549 = 0.2223.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example09a.png")
+```
+
+
+
+b).   P(130 < X < 211) = P(-0.45 < Z < 2.35) = P(Z < 2.35) - P(Z < -0.45) = 0.9906 - 0.3264 = 0.6642.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example09b.png")
+```
+
+
+c).   P(X < 125) =  P(Z < -0.62) = 0.2676.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example09c.png")
+```
+
+
+d).   P(x=143) = 0.
+
+e).   P(90 < X < 130) = P(-1.83 < Z < -0.45) = P(Z < -0.45) - P(Z < -1.83) = 0.3264 - 0.0336 = 0.2928.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example09e.png")
+```
+
+
+
+f). P(z < $z_0$) = 0.1, so we get $z_0$ = -1.285. The $P_{10}$ is calculated by $x = 143-1.285\times 29 = 105.73$.
+
+```{r echo = FALSE, fig.align='center', out.width="80%"}
+include_graphics("week04/example09f.png")
+```
+
+
+
+# Use of Technology
+
+**ISLA** has two apps to solve stabdard  normal and general normal distribution problems. 
+
+* The interactive **standard normal table** can be found at: <https://wcupeng.shinyapps.io/ZTable/>
+* Apps for solving general normal distribution problems can be found at <https://chengpeng.shinyapps.io/normal2Question/>.
+
+
+## Example 1 - Standard normal distribution
+
+We still use the **Thermometer**  example with the following two questions.
+
+(1) Randomly select a thermometer, what is the probability the reading of this thermometer in the ice water is bigger than 0.5?
+
+```{r echo = FALSE, fig.align='center', out.width="95%"}
+include_graphics("week04/Tech-Example01a.png")
+```
+
+(2) what is the cut-off reading that 75% of the readings of this type of thermometers in the ice water are higher than this cut-off?
+
+```{r echo = FALSE, fig.align='center', out.width="95%"}
+include_graphics("week04/Tech-Example01b.png")
+```
+<!--center><a href="https://mat121.s3.amazonaws.com/w04-standardNormal.mp4"><img src = "https://github.com/pengdsci/MAT121/blob/main/VideoIcon.png?raw=true" width="400" height="250"></a-->
+
+
+## Example 2 - General normal distribution 
+
+
+**Blood Pressure** The distribution of diastolic blood pressure for men is normally distributed with a mean of about 80 and a standard deviation of 8.
+
+(1) Randomly select a man from the population, what is the probability that his diastolic blood pressure is higher than 90.
+
+```{r echo = FALSE, fig.align='center', out.width="95%"}
+include_graphics("week04/Tech-Example02a.png")
+```
+
+(2) What is the cut-off diastolic blood pressure that 90% diastolic blood pressures are higher than it?
+
+```{r echo = FALSE, fig.align='center', out.width="95%"}
+include_graphics("week04/Tech-Example02b.png")
+```
+<!--center><a href="https://mat121.s3.amazonaws.com/w04-GeneralNormal.mp4"><img src = "https://github.com/pengdsci/MAT121/blob/main/VideoIcon.png?raw=true" width="400" height="250"></a-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
